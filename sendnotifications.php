@@ -18,8 +18,11 @@
     use Twilio\Rest\Client;
 
     // Step 2: set our AccountSid and AuthToken from https://twilio.com/console
-    $AccountSid = "ACa4b31790b01accd14a79f29d82d4f523";
-    $AuthToken = "your_auth_token";
+    $AccountSid     = getenv('TWILIO_ACCOUNT_SID');
+    $AuthToken      = getenv('TWILIO_AUTH_TOKEN');
+    $user_name      = getenv('MY_NAME');
+    $user_number    = "+1" . getenv('MY_PHONE_NUMBER');
+    $twilio_number  = "+1" . getenv('TWILIO_NUMBER');
 
     // Step 3: instantiate a new Twilio Rest Client
     $client = new Client($AccountSid, $AuthToken);
@@ -27,9 +30,7 @@
     // Step 4: make an array of people we know, to send them a message.
     // Feel free to change/add your own phone number and name here.
     $people = array(
-        "+15558675309" => "Curious George",
-        "+15558675308" => "Boots",
-        "+15558675307" => "Virgil"
+        "$user_number" => "$user_name"
     );
 
     // Step 5: Loop over all our friends. $number is a phone number above, and
@@ -43,11 +44,10 @@
 
             array(
                 // Step 6: Change the 'From' number below to be a valid Twilio number
-                // that you've purchased
-                'from' => "+15017250604",
+                'from' => "$twilio_number",
 
                 // the sms body
-                'body' => "Hey $name, Monkey Party at 6PM. Bring Bananas!"
+                'body' => "Dear $name, your scan is uploaded in LORIS!"
             )
         );
 
