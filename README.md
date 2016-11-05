@@ -14,7 +14,7 @@ https://www.twilio.com/, get a number, and some credits.
 ### Installation
 ---
 
-Steps:
+Steps:  
 1. Install dependencies with `./install.sh`  
 2. Populate your environment variables in your `.bashrc` with your Twilio credentials:
 
