@@ -18,11 +18,12 @@
     use Twilio\Rest\Client;
 
     // Step 2: set our AccountSid and AuthToken from https://twilio.com/console
+    // Twilio credentials are taken from your .bashrc profile
     $AccountSid     = getenv('TWILIO_ACCOUNT_SID');
     $AuthToken      = getenv('TWILIO_AUTH_TOKEN');
-    $user_name      = getenv('MY_NAME');
-    $user_number    = "+1" . getenv('MY_PHONE_NUMBER');
-    $twilio_number  = "+1" . getenv('TWILIO_NUMBER');
+    $TwilioNumber  = "+1" . getenv('TWILIO_NUMBER');
+    $UserName = $argv[1];
+    $UserNumber = "+1" . $argv[2];
 
     // Step 3: instantiate a new Twilio Rest Client
     $client = new Client($AccountSid, $AuthToken);
@@ -30,7 +31,7 @@
     // Step 4: make an array of people we know, to send them a message.
     // Feel free to change/add your own phone number and name here.
     $people = array(
-        "$user_number" => "$user_name"
+        "$UserNumber" => "$UserName"
     );
 
     // Step 5: Loop over all our friends. $number is a phone number above, and
@@ -44,7 +45,7 @@
 
             array(
                 // Step 6: Change the 'From' number below to be a valid Twilio number
-                'from' => "$twilio_number",
+                'from' => "$TwilioNumber",
 
                 // the sms body
                 'body' => "Dear $name, your scan is uploaded in LORIS!"
